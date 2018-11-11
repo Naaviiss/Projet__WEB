@@ -8,9 +8,13 @@
 </form>
 </html>
 <?php
+	#Création de la session
 	session_start();
 	
+	#Création des différentes matières
 	$matiere = array ("Mathématique","Anglais","Programmation","Algorithme","Economie");
+	
+	#On choisit la matière en question suivant le professeur qui s'est connecté
 	$n_matiere = $_SESSION['nom']{strlen($_SESSION['nom'])-1}; 
 
 	#ON PEUT SUREMENT FAIRE MIEUX MAIS LA JE VOIS PAS 
@@ -41,7 +45,7 @@
 	
 	#On va aller voir dans chaque fichier
 	$variable="vote-e10";
-	for ($i=4;$i<10;$i++){
+	for ($i=0;$i<99;$i++){
 		$file = $variable.$i.".txt";
 		
 		#Vérifier si le fichier existe bien
@@ -90,8 +94,7 @@
 	
 	#On ferme le tableau 
 	echo "</table>";
-	echo "</div>";
-	
+	echo "</div>";	
 ?>
 
 <?php
