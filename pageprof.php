@@ -46,8 +46,12 @@
 	#On va aller voir dans chaque fichier
 	$variable="vote-e10";
 	for ($i=0;$i<99;$i++){
-		$file = $variable.$i.".txt";
-		
+		if ($i < 10){
+			$file = $variable."0".$i.".txt";
+		}
+		else{
+			$file = $variable.$i.".txt";
+		}
 		#Vérifier si le fichier existe bien
 		#Sinon on ne fait rien
 		if (file_exists($file)) {
