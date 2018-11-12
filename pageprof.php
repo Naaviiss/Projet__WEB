@@ -12,11 +12,9 @@
 	session_start();
 	
 	#Création des différentes matières
-	$matiere = array ("Mathématique","Anglais","Programmation","Algorithme","Economie");
-	
+	$matiere = array (1 => "Mathématique","Anglais","Programmation","Algorithme","Economie");
 	#On choisit la matière en question suivant le professeur qui s'est connecté
 	$n_matiere = $_SESSION['nom']{strlen($_SESSION['nom'])-1}; 
-
 	#ON PEUT SUREMENT FAIRE MIEUX MAIS LA JE VOIS PAS 
  	$un = array();
 	$deux = array();
@@ -60,7 +58,9 @@
 			while ( !feof($monfichier) ){
 				$data = fgetcsv($monfichier, 0, ";");
 				#On regarde à quel niveau (1 à 5) la valeur correspond
-				switch($data[$n_matiere]){
+				#Or n_matiere va de 1 à 5 mais data va de 0 à 4.
+				#donc pour rétablir, n_matiere - 1
+				switch($data[$n_matiere-1]){
 					case 1:{
 							array_push($un, $data);
 							break;
