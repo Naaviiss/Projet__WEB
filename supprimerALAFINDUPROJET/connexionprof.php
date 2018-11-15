@@ -1,19 +1,19 @@
 <?php
 
+	session_start ();
+
 	//on récupère les identifiants entrés par l'utilisateur
-	
 	$login = $_POST['nom'];
 	$mdp = $_POST['mdp'];
 	
-	session_start ();
 	
 	$_SESSION['nom'] = $_POST['nom'];
 	$_SESSION['mdp'] = $_POST['mdp'];
 
 	//on créé le pattern permettant de connaître la forme du login attendue
 	$pattern_prof = '/prof[0-9]{2}/';
-
-	if (isset($login) and isset($mdp)){
+	
+	if (isset($login) and isset($mdp)){ //si les identifiants sont entrés
 		if(preg_match($pattern_prof, $login)){
 			$fichier_prof = "id-profs.csv";
 			if (file_exists($fichier_prof)){
