@@ -4,7 +4,5 @@
         unset($_SESSION["nom"]);
         session_destroy();
     }
-    else{
-        header('location: pageconnexion.php');
-    }
+    header('location: pageconnexion.php');
 ?>

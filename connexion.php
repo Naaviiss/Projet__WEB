@@ -1,16 +1,16 @@
 <?php
 	session_start ();
 
+	//on récupère les identifiants entrés par l'utilisateur
+	$login = $_POST['nom'];
+	$mdp = $_POST['mdp'];
+
 	//on créé les pattern permettant de connaître la forme du login attendue
 	$pattern_prof = '/prof[0-9]{2}/';
 	$pattern_admin = '/admin/';
 	$pattern_student = '/e[0-9]{4}/';
 
-	if (isset($_POST['nom']) and isset($_POST['mdp'])){ //si les identifiants sont entrés
-
-		//on récupère les identifiants entrés par l'utilisateur
-		$login = $_POST['nom'];
-		$mdp = $_POST['mdp'];
+	if (isset($login) and isset($mdp)){ //si les identifiants sont entrés
 
 		if(preg_match($pattern_prof, $login)){ //on teste si c'est un prof qui se connecte
 			$fichier_prof = "csv/id-profs.csv";
@@ -30,6 +30,7 @@
 					}
 				}
 			}
+			$_SESSION["nom"] = $login; //on lance une session
 		}
 
 		else if(preg_match($pattern_student, $login)){ //on teste si c'est un éleve qui se connecte
@@ -51,6 +52,7 @@
 					}
 				}
 			}
+			$_SESSION["nom"] = $login; //on lance une session
 		}
 
 		else if(preg_match($pattern_admin, $login)){ //on teste si c'est un admin qui se connecte
@@ -72,7 +74,7 @@
 					}
 				}
 			}
-			$_SESSION["nom"] = $login;
+			$_SESSION["nom"] = $login; //on lance une session
 		}
 
 		else{
