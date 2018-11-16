@@ -20,12 +20,12 @@
 		$matiere = array (1 => "Mathématique","Anglais","Programmation","Algorithme","Economie");
 		#On choisit la matière en question suivant le professeur qui s'est connecté
 		$n_matiere = $_SESSION['nom']{strlen($_SESSION['nom'])-1}; 
-		#ON PEUT SUREMENT FAIRE MIEUX MAIS LA JE VOIS PAS 
-		$un = array();
-		$deux = array();
-		$trois = array();
-		$quatre = array();
-		$cinq = array();
+		
+		$un = 0;
+		$deux = 0;
+		$trois = 0;
+		$quatre = 0;
+		$cinq = 0;
 		
 			
 		#Creation du tableau 
@@ -67,23 +67,23 @@
 					#donc pour rétablir, n_matiere - 1
 					switch($data[$n_matiere-1]){
 						case 1:{
-								array_push($un, $data);
+								$un=$un+1;
 								break;
 						}
 						case 2:{
-								array_push($deux, $data);
+								$deux=$deux+1;
 								break;
 						}
 						case 3:{
-								array_push($trois, $data);
+								$trois=$trois+1;
 								break;
 						}
 						case 4:{
-								array_push($quatre, $data);
+								$quatre=$quatre+1;
 								break;
 						}
 						case 5:{
-								array_push($cinq, $data);
+								$cinq=$cinq+1;
 								break;
 						}
 					}
@@ -92,12 +92,11 @@
 			}		
 		}#Fin du FOR
 		
-		#ON PEUT SUREMENT FAIRE MIEUX MAIS JE VOIS PAS POUR L INSTANT 
-		echo "<td><strong>", number_format(count($un)),"</strong></td>";
-		echo "<td><strong>", number_format(count($deux)),"</strong></td>";
-		echo "<td><strong>", number_format(count($trois)),"</strong></td>";
-		echo "<td><strong>", number_format(count($quatre)),"</strong></td>";
-		echo "<td><strong>", number_format(count($cinq)),"</strong></td>";
+		echo "<td><strong>".$un."</strong></td>";
+		echo "<td><strong>".$deux."</strong></td>";
+		echo "<td><strong>".$trois."</strong></td>";
+		echo "<td><strong>".$quatre."</strong></td>";
+		echo "<td><strong>".$cinq."</strong></td>";
 		echo "</tr>";		
 
 		
