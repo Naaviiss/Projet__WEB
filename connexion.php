@@ -8,7 +8,7 @@
 	//on créé les pattern permettant de connaître la forme du login attendue
 	$pattern_prof = '/prof[0-9]{2}/';
 	$pattern_admin = '/admin/';
-	$pattern_student = '/e1[0-9]{4}/';
+	$pattern_student = '/e1[0-9]{3}/';
 
 	if (isset($login) and isset($mdp)){ //si les identifiants sont entrés
 
@@ -45,7 +45,7 @@
 				if ($login === $ligne[0]){
 					echo "coucou je fonctionne !";
 					if ($mdp === $ligne[1]){
-						echo "je peux me connecter ";
+						header('Location: page_de_vote.php');
 					}
 					else{
 						echo "pas de chance loser ";
@@ -67,7 +67,7 @@
 				if ($login === $ligne[0]){
 					echo "coucou je fonctionne !";
 					if ($mdp === $ligne[1]){
-						echo "je peux me connecter";
+						header('Location: page_admin.php');
 					}
 					else{
 						echo "pas de chance ";
