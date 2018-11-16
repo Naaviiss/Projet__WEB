@@ -60,24 +60,24 @@ if($_SESSION["nom"]==NULL){
 							}
 						}
 						
-						if(file_exists('csv/vote-'.$_SESSION["nom"].'.txt')) {
-							$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'r');
+						if(file_exists('votes/vote-'.$_SESSION["nom"].'.txt')) {
+							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
 							$mesnotes = fgets($monfichier, '10');
 							if(!(in($mesnotes[0]) and in($mesnotes[2]) and in($mesnotes[4]) and in($mesnotes[6]) and in($mesnotes[8]) and $mesnotes[1]==";" and $mesnotes[3]==";" and $mesnotes[5]==";" and $mesnotes[7]==";")) {
 								#si le fichier n'es pas bien forme ou contient une valeur non valide, le reinitialise
 								fclose($monfichier);
-								$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'w');
+								$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'w');
 								fputs($monfichier, "0;0;0;0;0");
 								fclose($monfichier);
-								$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'r');
+								$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
 								$mesnotes = fgets($monfichier, '10');
 							}
 						}
 						else{
-							$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'w');
+							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'w');
 							fputs($monfichier, "0;0;0;0;0");
 							fclose($monfichier);
-							$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'r');
+							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
 							$mesnotes = fgets($monfichier, '10');
 						}
 
@@ -249,7 +249,7 @@ if($_SESSION["nom"]==NULL){
 					$ue5 = $mesnotes[8];
 				}
 				
-				$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'w'); #ouverture du fichier selon l'eleve connecter
+				$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'w'); #ouverture du fichier selon l'eleve connecter
 				fputs($monfichier, $ue1.';'.$ue2.';'.$ue3.';'.$ue4.';'.$ue5); #ecrit dans le fichier les notes
 				fclose($monfichier);
 				header ('Location: page_de_vote.php'); #on recharge la page pour afficher les changements
