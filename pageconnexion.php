@@ -1,20 +1,31 @@
 <?php session_start(); ?>
+<!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-	</head>
-	
+    <head>
+        <meta charset="utf-8" />
+        <title>Page de connexion</title>
+		<link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+    </head>
+	<?php Include("haut_page.html"); ?>
 	<body>
-		<form method="post" action="connexion.php">
-			<input type="text" name="nom" class="form-control input-sm chat-input" placeholder="username" />
-			<br/>
-			<input type="password" name="mdp" id="mdp" class="form-control input-sm chat-input" placeholder="password" />
-			<br/>
-			<div class="wrapper">
-				<span class="group-btn">
-					<input type="submit" name="ok" value="Login" class="btn btn-primary btn-md"/>
-				</span>
+		<div class="container-fluid">
+			<div class="container">
+				<form method="post" action="connexion.php">
+				  <div class="form-group">
+					<label for="exampleInputEmail1">Login</label>
+					<input type="text" name="nom" class="form-control input-sm chat-input" placeholder="username" />
+				  </div>
+				  <div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					<input type="password" name="mdp" id="mdp" class="form-control input-sm chat-input" placeholder="password" />
+				  </div>
+				  <div class="form-group form-check">
+					<input type="checkbox" class="form-check-input" id="exampleCheck1">
+					<label class="form-check-label" for="exampleCheck1">Check me out</label>
+				  </div>
+				  <button type="submit" class="btn btn-primary">Submit</button>
+				</form>
 			</div>
-		</form>
+		</div>
 	</body>
 </html>
