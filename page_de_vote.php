@@ -1,8 +1,8 @@
 <?php
 session_start();
-if($_SESSION["nom"]==NULL)
-	//echo "<script type='text/javascript'>document.location.replace('index.php');</script>";
-//echo "<h1>Bonjours ".$_SESSION["nom"]."</br></h1>";
+if($_SESSION["nom"]==NULL){
+	header ('Location: pageconnexion.php');
+}
 ?>
 <html>
 
@@ -10,7 +10,7 @@ if($_SESSION["nom"]==NULL)
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="css/css_footer.css" media="all"/>
 	</head>
 	
@@ -18,9 +18,9 @@ if($_SESSION["nom"]==NULL)
 		<div class="menu">
 			<div class="container-fluid">
 				<div>
-					<form name="form" action="" method="post">
+					<form name="form" action="deconnexion.php" method="post">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a  type='submit' name='dec' id='dec' value='deconection' href="#####"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+							<button type="submit" class="btn btn-primary">Me déconnecter</button>
 						</ul>
 					</form>
 				</div>
@@ -30,20 +30,7 @@ if($_SESSION["nom"]==NULL)
 	
 	<body>
 	<center>
-
-		<?php
-			if(isset($_POST['dec'])){
-				$dec = $_POST['dec'];
-				
-				if($dec=="deconection"){
-					unset($_SESSION["nom"]);
-					unset($_SESSION["admin"]);
-					session_destroy();
-					header ('Location: page_de_vote.php'); //changer le nom de la page
-				}
-			}
-		?>
-
+		<h1>Bonjour <?php echo $_SESSION["nom"];?></br></h1>
 		<h2>Pour voter choisissez un avis puis validez</h2></hr/>
 
 		<fieldset class='field'><legend>  </legend>
@@ -73,24 +60,24 @@ if($_SESSION["nom"]==NULL)
 							}
 						}
 						
-						if(file_exists('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt')) {
-							$monfichier = fopen('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt', 'r');
+						if(file_exists('csv/vote-'.$_SESSION["nom"].'.txt')) {
+							$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'r');
 							$mesnotes = fgets($monfichier, '10');
 							if(!(in($mesnotes[0]) and in($mesnotes[2]) and in($mesnotes[4]) and in($mesnotes[6]) and in($mesnotes[8]) and $mesnotes[1]==";" and $mesnotes[3]==";" and $mesnotes[5]==";" and $mesnotes[7]==";")) {
 								#si le fichier n'es pas bien forme ou contient une valeur non valide, le reinitialise
 								fclose($monfichier);
-								$monfichier = fopen('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt', 'w');
+								$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'w');
 								fputs($monfichier, "0;0;0;0;0");
 								fclose($monfichier);
-								$monfichier = fopen('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt', 'r');
+								$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'r');
 								$mesnotes = fgets($monfichier, '10');
 							}
 						}
 						else{
-							$monfichier = fopen('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt', 'w');
+							$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'w');
 							fputs($monfichier, "0;0;0;0;0");
 							fclose($monfichier);
-							$monfichier = fopen('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt', 'r');
+							$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'r');
 							$mesnotes = fgets($monfichier, '10');
 						}
 
@@ -190,7 +177,6 @@ if($_SESSION["nom"]==NULL)
 		</fieldset>
 
 		<?php
-
 			function in($val) {
 				#fonction permettant de verifier si une valeur est bien dans le tableau ["0","1","2","3","4","5"]
 				#retourne vrai si la valeur est dans le tableau et faux sinon
@@ -263,10 +249,10 @@ if($_SESSION["nom"]==NULL)
 					$ue5 = $mesnotes[8];
 				}
 				
-				$monfichier = fopen('csv/vote-'./*$_SESSION["nom"]*/'etuTEST'.'.txt', 'w'); #ouverture du fichier selon l'eleve connecter
+				$monfichier = fopen('csv/vote-'.$_SESSION["nom"].'.txt', 'w'); #ouverture du fichier selon l'eleve connecter
 				fputs($monfichier, $ue1.';'.$ue2.';'.$ue3.';'.$ue4.';'.$ue5); #ecrit dans le fichier les notes
 				fclose($monfichier);
-				header ('Location: page_de_vote.php');; #on recharge la page pour afficher les changements
+				header ('Location: page_de_vote.php'); #on recharge la page pour afficher les changements
 			}
 		?>
 	</center>
