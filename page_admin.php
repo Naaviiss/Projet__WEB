@@ -34,7 +34,7 @@
 		</tr>
 	<?php
 	for($i=$first_doc; $i<=$last_doc; $i++){
-		$file = "vote-e" .$i .".txt";
+		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
 		if (file_exists($file)) {
 			$monfichier = fopen($file, 'r+');
@@ -58,7 +58,7 @@
 	$moy=array(0,0,0,0,0);
 	$nb_file=0;
 	for($i=$first_doc; $i<=$last_doc; $i++){
-		$file = "vote-e" .$i .".txt";
+		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
 		if (file_exists($file)) {
 			$monfichier = fopen($file, 'r+');
@@ -92,7 +92,7 @@
 	$liste_algorithme=array();
 	$liste_economie=array();
 	for($i=$first_doc; $i<=$last_doc; $i++){
-		$file = "vote-e" .$i .".txt";
+		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
 		if (file_exists($file)) {
 			$monfichier = fopen($file, 'r+');
