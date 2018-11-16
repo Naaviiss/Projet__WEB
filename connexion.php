@@ -8,7 +8,7 @@
 	//on créé les pattern permettant de connaître la forme du login attendue
 	$pattern_prof = '/prof[0-9]{2}/';
 	$pattern_admin = '/admin/';
-	$pattern_student = '/e[0-9]{4}/';
+	$pattern_student = '/e1[0-9]{4}/';
 
 	if (isset($login) and isset($mdp)){ //si les identifiants sont entrés
 
