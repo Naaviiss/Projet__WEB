@@ -116,12 +116,12 @@
 							case "prof":
 								$_SESSION["nom"] = $login; //on lance une session
 								$_SESSION["role"] = $role; //on lance une session
-								header('Location: page_de_vote.php');
+								header('Location: pageprof.php');
 								break;
 							case "student":
 								$_SESSION["nom"] = $login; //on lance une session
 								$_SESSION["role"] = $role; //on lance une session
-								header('Location: pageprof.php');
+								header('Location: page_de_vote.php');
 								break;
 							case "admin":
 								$_SESSION["nom"] = $login; //on lance une session
