@@ -4,7 +4,7 @@
 <!-- RAJOUTER -->
 <!-- Nom prof en colonne -->
 <!-- Possibilité un tableau par prof (ex : 2notes de 3 ...) -->
-
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
