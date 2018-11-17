@@ -5,15 +5,20 @@
 
 <!doctype html>
 <html lang="fr">
-	<head>
-	<meta charset="UTF-8">
-	</head>
-	<body>
-		<form name="form" action="deconnexion.php" method="post">
-			<input type='submit' name='dec' id='dec' value='Deconnexion'>
-		</form>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>Page des professeurs</title>
+		<link href="css/css_pageprof.css" rel="stylesheet" id="bootstrap-css"/>
+    </head>
 </html>
+
+<section>
+	<!--Creation du tableau -->
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
 <?php
 	if (isset($_SESSION["nom"])){ //si l'utilisateur est connecté
 		#Création des différentes matières
@@ -27,21 +32,25 @@
 		$quatre = 0;
 		$cinq = 0;
 		
-			
-		#Creation du tableau 
-		echo "<div id='droite'><table border='1' cellpadding='8'>";
-		echo "<tr>";
-		
 		#Creation de la première ligne avec la matiere en question
-		echo "<td><font color=\"blue\"><strong>",$matiere[$n_matiere],"</strong></font></td>";
-		
+		echo "<th>",$matiere[$n_matiere],"</th>";
+
 		#Pour la première ligne avec tous les votes possibles.
-		$ligne = array(1,2,3,4,5);
-		foreach ($ligne as $lign) {
-				echo "<td><strong>",$lign,"</strong></td>";
-		}
-		echo "</tr>";
+		$ligne = array("Très mécontent","Mécontent","Moyen","Satisfait","Très satisfait");
 		
+		foreach ($ligne as $lign) {
+				echo "<th><strong>",$lign,"</strong></th>";
+		}
+
+		echo "				</tr>
+					</thead>
+				</table>
+			</div>
+			<div class='tbl-content'>
+				<table cellpadding='0' cellspacing='0' border='0'>
+					<tbody>
+						<tr>";
+						
 		#Creation de la deuxième ligne avec le nombre de votes 
 		echo "<td><strong> Nombre de votes</strong></td>";
 		
@@ -97,12 +106,16 @@
 		echo "<td><strong>".$trois."</strong></td>";
 		echo "<td><strong>".$quatre."</strong></td>";
 		echo "<td><strong>".$cinq."</strong></td>";
-		echo "</tr>";		
-
+		echo "</tr>";
 		
 		#On ferme le tableau 
-		echo "</table>";
-		echo "</div>";
+		echo "      	</tbody>
+					</table>
+				</div>
+		</section>
+		
+		</body>
+		</html>";
 	}	
 	else{
 		header('location: pageconnexion.php');
