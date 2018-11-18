@@ -7,7 +7,7 @@
 <?php
 session_start();
 if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "prof"){
-	header ('Location: pageconnexion.php');
+	header ('Location: deconnexion.php');
 }
 ?>
 <!doctype html>

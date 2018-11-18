@@ -2,8 +2,9 @@
 	//Création de la session
 	session_start();
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "admin"){
-		header ('Location: pageconnexion.php');
+		header ('Location: deconnexion.php');
 	}
+	else{
 ?>
 
 <!doctype html>
@@ -24,7 +25,6 @@
       <thead>
         <tr>
 <?php
-	if (isset($_SESSION["nom"]) and $_SESSION["role"] == "prof"){ //si l'utilisateur est connecté
 		#Création des différentes matières
 		$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithme","Economie");
 		#On choisit la matière en question suivant le professeur qui s'est connecté
@@ -121,8 +121,5 @@
 		</body>
 		</html>";
 	}	
-	else{
-		header('location: pageconnexion.php');
-	}
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] === "admin"){  //si l'utilisateur est connecter ou est bien un élève
-	header ('Location: pageconnexion.php');
+	header ('Location: deconnexion.php');
 }
 ?>
 <html>

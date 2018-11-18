@@ -8,5 +8,5 @@
         unset($_SESSION["role"]);
         session_destroy();
     }
-    header('location: pageconnexion.php');
+    header('location: index.php');
 ?>
