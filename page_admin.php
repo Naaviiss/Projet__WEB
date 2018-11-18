@@ -6,7 +6,7 @@
 <!-- Possibilité un tableau par prof (ex : 2notes de 3 ...) -->
 <?php
 session_start();
-if($_SESSION["nom"]==NULL and $_SESSION["role"] == "student"  and $_SESSION["role"] == "admin"){
+if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "prof"){
 	header ('Location: pageconnexion.php');
 }
 ?>

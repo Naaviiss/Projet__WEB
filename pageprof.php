@@ -1,6 +1,9 @@
 <?php 
 	//Création de la session
 	session_start();
+	if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "admin"){
+		header ('Location: pageconnexion.php');
+	}
 ?>
 
 <!doctype html>
