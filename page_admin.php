@@ -4,35 +4,45 @@
 <!-- RAJOUTER -->
 <!-- Nom prof en colonne -->
 <!-- Possibilité un tableau par prof (ex : 2notes de 3 ...) -->
-<?php session_start();?>
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <meta charset="UTF-8">
-	<title>Page admin</title>
-</head>
-<body>
-	<h1>Projet PhP</h1>
-    <h3>Côté admin</h3> 
-
-
+<?php
+session_start();
+if($_SESSION["nom"]==NULL and $_SESSION["role"] == "student"  and $_SESSION["role"] == "admin"){
+	header ('Location: pageconnexion.php');
+}
+?>
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Page de l'admin</title>
+		<link href="css/css.css" rel="stylesheet" id="bootstrap-css"/>
+    </head>
+	<?php Include("haut_page.html"); ?>
+<section>
+	<!--Creation du tableau -->
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
 <?php
 	$first_doc = 1001;
 	$last_doc = 1020;
 	
-	// En tête
-?>
-	<table border='1'>
-		<tr>
-			<th></th>
-			<th>Maths</th>
-			<th>Anglais</th>
-			<th>Programmation</th>
-			<th>Algorithme</th>
-			<th>Economie</th>
-		</tr>
-	<?php
+	//Création de la première ligne pour l'ensemble des votes
+	$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithme","Economie");
+	foreach ($matiere as $lign) {
+			echo "<th><strong>",$lign,"</strong></th>";
+	}
+	echo "				</tr>
+					</thead>
+				</table>
+			</div>
+			<div class='tbl-content'>
+				<table cellpadding='0' cellspacing='0' border='0'>
+					<tbody>"
+						;
+						
+						
 	for($i=$first_doc; $i<=$last_doc; $i++){
 		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
@@ -42,8 +52,6 @@
 			while ( !feof($monfichier) ){
 				echo "<tr>";
 				$dataFile = fgetcsv($monfichier, 0, ";");
-				//colonne vide gauche
-				echo "<td></td>";
 				foreach ($dataFile as $contenu) {
 					echo "<td>",$contenu,"</td>";
 				}
@@ -52,9 +60,40 @@
 			fclose($monfichier);
 		}
 	}
-		// LIGNE MATIERE
-	echo "<tr><th></th><th>Maths</th><th>Anglais</th><th>Programmation</th><th>Algorithme</th><th>Economie</th></tr>";
-	// MOYENNE DES NOTES
+	
+	//On ferme le premier tableau
+	echo "      	</tbody>
+				</table>
+			</div>
+	</section>";		
+		
+		
+	// Création de l'autre tableau  
+	// Pour la moyenne et l'écart type
+	echo "<section>
+			<!--Creation du tableau -->
+
+			<div class='tbl-header'>
+				<table cellpadding='0' cellspacing='0' border='0'>
+					<thead>
+						<tr>
+						<th></th>"; // Ligne vide pour que tout soit aligné
+						
+	//Toujours la ligne avec chaque matière					
+	foreach ($matiere as $lign) {
+			echo "<th><strong>",$lign,"</strong></th>";
+	}
+	
+	echo "				</tr>
+					</thead>
+				</table>
+			</div>
+			<div class='tbl-content'>
+				<table cellpadding='0' cellspacing='0' border='0'>
+					<tbody>"
+						;
+	
+	// CALCUL DE LA MOYENNE DES NOTES
 	$moy=array(0,0,0,0,0);
 	$nb_file=0;
 	for($i=$first_doc; $i<=$last_doc; $i++){
@@ -76,15 +115,15 @@
 	for($i=0; $i<5; $i++){
 		$moy[$i]=$moy[$i]/$nb_file;
 	}
-	// Affiche
+	// Affiche la moyenne pour chaque matière
 	echo"<tr><th>Moyenne</th>";
 	for($i=0; $i<5; $i++){
 		echo"<td>".$moy[$i]."</td>";
 	}
 	echo"<tr>";
 
-	// ECART TYPE DES NOTES
-	//liste notes chaque matière
+	// CALCUL DE L ECART TYPE DES NOTES
+	//liste des notes pour chaque matière
 	$nb_file=0;
 	$liste_maths=array();
 	$liste_anglais=array();
@@ -138,9 +177,12 @@
 		echo"<td>".round($ecart_type,3)."</td>";
 	}
 	echo"</tr>";
-
-
-	echo "</table>";
+	
+	#On ferme le deuxième tableau 
+	echo "      	</tbody>
+					</table>
+				</div>
+		</section>";
 	?>
 
 </body>
