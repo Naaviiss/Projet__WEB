@@ -8,10 +8,11 @@
     <head>
         <meta charset="utf-8" />
         <title>Page des professeurs</title>
-		<link href="css/css_pageprof.css" rel="stylesheet" id="bootstrap-css"/>
+		<link href="css/css.css" rel="stylesheet" id="bootstrap-css"/>
     </head>
+	
+	<?php Include("haut_page.html"); ?>
 </html>
-
 <section>
 	<!--Creation du tableau -->
 
@@ -20,9 +21,9 @@
       <thead>
         <tr>
 <?php
-	if (isset($_SESSION["nom"])){ //si l'utilisateur est connecté
+	if (isset($_SESSION["nom"]) and $_SESSION["role"] == "prof"){ //si l'utilisateur est connecté
 		#Création des différentes matières
-		$matiere = array (1 => "Mathématique","Anglais","Programmation","Algorithme","Economie");
+		$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithme","Economie");
 		#On choisit la matière en question suivant le professeur qui s'est connecté
 		$n_matiere = $_SESSION['nom']{strlen($_SESSION['nom'])-1}; 
 		
@@ -35,7 +36,7 @@
 		#Creation de la première ligne avec la matiere en question
 		echo "<th>",$matiere[$n_matiere],"</th>";
 
-		#Pour la première ligne avec tous les votes possibles.
+		#Pour la premiÃ¨re ligne avec tous les votes possibles.
 		$ligne = array("Très mécontent","Mécontent","Moyen","Satisfait","Très satisfait");
 		
 		foreach ($ligne as $lign) {
@@ -121,3 +122,4 @@
 		header('location: pageconnexion.php');
 	}
 ?>
+
