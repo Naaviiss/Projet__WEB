@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["nom"]==NULL){
+if($_SESSION["nom"]==NULL and $_SESSION["role"] == "prof"  and $_SESSION["role"] == "admin"){  //si l'utilisateur est connecter ou est bien un élève
 	header ('Location: pageconnexion.php');
 }
 ?>
@@ -15,17 +15,7 @@ if($_SESSION["nom"]==NULL){
 	</head>
 	
 	<header>
-		<div class="menu">
-			<div class="container-fluid">
-				<div>
-					<form name="form" action="deconnexion.php" method="post">
-						<ul class="nav navbar-nav navbar-right">
-							<button type="submit" class="btn btn-primary">Me déconnecter</button>
-						</ul>
-					</form>
-				</div>
-			</div>
-		</div>
+		<?php Include("haut_page.html"); ?>
 	</header>
 	
 	<body>
@@ -168,6 +158,9 @@ if($_SESSION["nom"]==NULL){
 						
 						if ($mesnotes[0] == "0" or $mesnotes[2] == "0" or $mesnotes[4] == "0" or $mesnotes[6] == "0" or $mesnotes[8] == "0"){ #si il manque un champs a renseigner affiche le bouton
 							echo "<tr><tr><td></td><td><input type='submit' name='ok' value='Valider'></td>";
+						}
+						else {
+							echo "<h3>Vous avez déjà voter dans toutes les matières</br><h3>";
 						}
 						fclose($monfichier);
 					?>
