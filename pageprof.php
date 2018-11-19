@@ -12,17 +12,21 @@
     <head>
         <meta charset="utf-8" />
         <title>Page des professeurs</title>
-		<link href="css/css.css" rel="stylesheet" id="bootstrap-css"/>
+		<link href="css/css.css" rel="stylesheet" id="css"/>
     </head>
-	
-	<?php Include("haut_page.html"); ?>
-<section>
-	<!--Creation du tableau -->
 
-  <div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
+	<body>
+	<header><?php Include("haut_page.html"); ?></header>
+
+
+	<section>
+
+		<!--Creation du tableau -->
+
+	  <div class="tbl-header">
+		<table cellpadding="0" cellspacing="0" border="0">
+		  <thead>
+			<tr>
 <?php
 		#Création des différentes matières
 		$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithme","Economie");

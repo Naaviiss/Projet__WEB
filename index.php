@@ -6,7 +6,6 @@
         <title>Page de connexion</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
     </head>
-	<?php Include("haut_page.html"); ?>
 	<body>
 		<div class="container-fluid">
 			<div class="container">
