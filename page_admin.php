@@ -1,16 +1,10 @@
-<!-- Visualiser bilan des votes regroupés par ue sous la forme d'un tab -->
-<!-- Tab avec ; répartition des notes ; la moyenne ; l'écart type -->
-
-<!-- RAJOUTER -->
-<!-- Nom prof en colonne -->
-<!-- Possibilité un tableau par prof (ex : 2notes de 3 ...) -->
 <?php
-session_start();
-if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "prof"){
-	header ('Location: deconnexion.php');
-}
+	session_start();
+	if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "prof"){
+		header ('Location: deconnexion.php');
+	}
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="utf-8" />
@@ -116,11 +110,12 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role
 		$moy[$i]=$moy[$i]/$nb_file;
 	}
 	// Affiche la moyenne pour chaque matière
-	echo"<tr><th>Moyenne</th>";
+	echo"<tr>
+		<th>Moyenne</th>";
 	for($i=0; $i<5; $i++){
 		echo"<td>".$moy[$i]."</td>";
 	}
-	echo"<tr>";
+	echo"</tr>";
 
 	// CALCUL DE L ECART TYPE DES NOTES
 	//liste des notes pour chaque matière
