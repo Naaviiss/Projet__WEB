@@ -4,21 +4,15 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] 
 	header ('Location: deconnexion.php');
 }
 ?>
-<html>
-
-	<head>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="css/css_footer.css" media="all"/>
-	</head>
-	
-	<header>
-		<?php Include("haut_page.html"); ?>
-	</header>
-	
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Page de vote</title>
+		<link href="css/css.css" rel="stylesheet" id="css"/>
+    </head>
 	<body>
+	<?php Include("haut_page.html"); ?>
 	<center>
 		<h1>Bonjour <?php echo $_SESSION["nom"];?></br></h1>
 		<h2>Pour voter choisissez un avis puis validez</h2></hr/>
@@ -49,7 +43,6 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] 
 								return "Très satisfait";
 							}
 						}
-						
 						if(file_exists('votes/vote-'.$_SESSION["nom"].'.txt')) {
 							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
 							$mesnotes = fgets($monfichier, '10');
@@ -70,7 +63,7 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] 
 							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
 							$mesnotes = fgets($monfichier, '10');
 						}
-
+						echo"<div class='test'";
 						if ($mesnotes[0] == "0"){ #affiche le sondage pour cette matiere que si elle na pas encore été renseigner
 							echo "<tr><td>Mathématiques </td><td><p>
 								   <label for=\"ue1\">la note attribuée</label><br />
@@ -155,7 +148,7 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] 
 						else{ #sinon affiche la note
 							echo "Economie                   : ".toString($mesnotes[8])."</br>";
 						}
-						
+						echo "</div>";
 						if ($mesnotes[0] == "0" or $mesnotes[2] == "0" or $mesnotes[4] == "0" or $mesnotes[6] == "0" or $mesnotes[8] == "0"){ #si il manque un champs a renseigner affiche le bouton
 							echo "<tr><tr><td></td><td><input type='submit' name='ok' value='Valider'></td>";
 						}
@@ -249,9 +242,7 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] 
 			}
 		?>
 	</center>
-	</body>
-	
-	<footer>
-		<p>2018 - <a style="color:#0a93a6; text-decoration:none;"> Projet Web</a> / Ducamp - Gonzalez - Cassand - Armengaud - Lebailly</p>
-	</footer>
+</body>
+	<footer><?php Include("footer.html"); ?></footer>
+
 </html>

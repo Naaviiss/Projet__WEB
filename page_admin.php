@@ -9,9 +9,11 @@
     <head>
         <meta charset="utf-8" />
         <title>Page de l'admin</title>
-		<link href="css/css.css" rel="stylesheet" id="bootstrap-css"/>
+		<link href="css/css.css" rel="stylesheet" id="css"/>
     </head>
+	<body>
 	<?php Include("haut_page.html"); ?>
+	
 <section>
 	<!--Creation du tableau -->
   <div class="tbl-header">
@@ -181,4 +183,6 @@
 	?>
 
 </body>
+	<footer><?php Include("footer.html"); ?></footer>
+
 </html>

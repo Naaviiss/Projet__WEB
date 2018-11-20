@@ -43,7 +43,7 @@
 							case "prof":
 								$_SESSION["nom"] = $login; //on lance une session
 								$_SESSION["role"] = $role; //on lance une session
-								header('Location: pageprof.php');
+								header('Location: page_prof.php');
 								break;
 							case "student":
 								$_SESSION["nom"] = $login; //on lance une session
