@@ -10,6 +10,7 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] === "prof"  or $_SESSION["role"] 
         <meta charset="utf-8" />
         <title>Page de vote</title>
 		<link href="css/css.css" rel="stylesheet" id="css"/>
+		<link rel="icon" href="images/logo-uvsq.png">
     </head>
 	<body>
 	<?php Include("haut_page.html"); ?>

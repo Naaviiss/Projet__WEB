@@ -10,6 +10,7 @@
         <meta charset="utf-8" />
         <title>Page de l'admin</title>
 		<link href="css/css.css" rel="stylesheet" id="css"/>
+		<link rel="icon" href="images/logo-uvsq.png">
     </head>
 	<body>
 	<?php Include("haut_page.html"); ?>

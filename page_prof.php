@@ -13,6 +13,7 @@
         <meta charset="utf-8" />
         <title>Page des professeurs</title>
 		<link href="css/css.css" rel="stylesheet" id="css"/>
+		<link rel="icon" href="images/logo-uvsq.png">
     </head>
 
 	<header><?php Include("haut_page.html"); ?></header>
