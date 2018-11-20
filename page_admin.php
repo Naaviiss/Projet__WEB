@@ -27,7 +27,7 @@
 	$last_doc = 1020;
 	
 	//Création de la première ligne pour l'ensemble des votes
-	$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithme","Economie");
+	$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithmique","Economie");
 	foreach ($matiere as $lign) {
 			echo "<th><strong>",$lign,"</strong></th>";
 	}
