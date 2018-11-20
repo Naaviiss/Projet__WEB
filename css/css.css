@@ -37,3 +37,12 @@ section{
   margin: 50px;
 }
 
+.pdf{
+  width: 400px!important;
+}
+.boutonPDF{
+  float: center!important;
+  display: block!important;
+  background-color: #398689 !important;
+  border-color: #398689 !important;
+}

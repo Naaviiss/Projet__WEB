@@ -182,7 +182,13 @@
 		</section>";
 	?>
 
+	<!-- On ajoute le bouton pour créer le pdf -->
+	<div class="container pdf">
+		<section>
+			<a class="btn btn-primary boutonPDF" href="#" role="button">Générer un PDF</a>
+		</section>
+	</div>
+
 </body>
 	<footer><?php Include("footer.html"); ?></footer>
-
 </html>

@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8" />
         <title>Page de connexion</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
-		<link href="css/css_index.css" rel="stylesheet" id="bootstrap-css"/>
+			<link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+			<link href="css/css_index.css" rel="stylesheet" id="bootstrap-css"/>
     </head>
 	<body class="text-center">
 		<div class="container-fluid">
