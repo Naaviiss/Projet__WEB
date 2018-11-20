@@ -46,3 +46,15 @@ section{
   background-color: #398689 !important;
   border-color: #398689 !important;
 }
+.container{
+  text-align: center!important;
+}
+.txtAdmin{
+  text-align: center!important;
+  margin-bottom: 10px!important;
+  font-weight: bold!important;
+}
+.pAdmin{
+  text-align: center!important;
+  margin-bottom: 30px!important;
+}

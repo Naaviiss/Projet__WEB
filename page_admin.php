@@ -16,6 +16,8 @@
 	
 <section>
 	<!--Creation du tableau -->
+	<h1 class="txtAdmin">Bonjour <?php echo ucfirst($_SESSION["nom"]);?></br></h1>
+	<p class="pAdmin">Voici un tableau résumant les résultats obtenus grâce aux votes des étudiants</p>
   <div class="tbl-header">
     <table cellpadding="0" cellspacing="0" border="0">
       <thead>
