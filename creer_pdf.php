@@ -1,46 +1,35 @@
 <?php
     session_start();
     if (isset($_SESSION["nom"]) and $_SESSION["role"] === "admin"){ //seul l'administrateur peut générer un pdf
-        // require('./fpdf/mc_pdf.php');  
-        
-        $tabNotes = $_SESSION["table"];
+        require('./fpdf.php');
 
         //creation de l'objet PDF
-        $pdf = new new PDF_MC_Table();
+        $pdf = new FPDF('l','mm','A4'); //feuille format A4, paysage, dimensions exprimées en mm
 
-        //  //on créée la page et on définit la police 
+        //on créée la page et on définit la police 
         $pdf -> AddPage();
         $pdf -> SetFont('Times','B',10);
         $pdf -> SetMargins(500, 5);
 
+        //on définit les paramètres des cellules
+        $wcell = 40;
+        $hcell = 10;
+        $border = 1;
+        $align = 'C';
+
         //on remplit le PDF
         $tabNotes = $_SESSION["table"];
-        $pdf->SetWidths(array(30,50,30,40));
 
-        for($i=0;$i<count($tabNotes);$i++)
-            $pdf->Row($tabNotes[$i]);
+            foreach($tabNotes[0] as $note){
+                $pdf -> Cell($wcell,$hcell,utf8_decode($note),$border,0,$align);
+            }
+            $pdf->Ln();
+        
+            foreach($tabNotes[1] as $note){
+                $pdf -> Cell($wcell,$hcell,utf8_decode($note),$border,0,$align);
+            }
+
         $pdf->Output();
-
-        // for($i=0;$i<count($tabNotes);$i++){
-        //     $pdf->Row($tabNotes[$i]);
-        // }
-            
-        // $pdf -> Output();
-        //on remplit le pdf
-        // for($i=0;$i<count($matieres);$i++){
-        //     $pdf->Cell($wcell,$hcell,utf8_decode($matieres[$i]),$border,$ln,$align);
-        // }
-        // $pdf -> Output();
-
-        //on remplit la page avec les donnees des votes
-        // for($i=0;$i<count($donnees);$i++){
-        //     if($i%5==4){ //fin de ligne
-        //         $pdf->Cell($wcell,$hcell,$donnees[$i],$border,1,$align);
-        //     }
-        //     else{
-        //         $pdf->Cell($wcell,$hcell,$donnees[$i],$border,$ln,$align);
-        //     }
-        // }
 
         //on redirige l'administrateur vers sa page
         //header('location: page_admin.php');
