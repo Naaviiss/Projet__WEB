@@ -51,6 +51,10 @@
 	$liste_algorithme=array();
 	$liste_economie=array();
 
+	//tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
+	$tab = array();
+	array_push($tab,$matiere);
+
 	for($i=$first_doc; $i<=$last_doc; $i++){
 		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
@@ -60,6 +64,7 @@
 			while ( !feof($monfichier) ){
 				echo "<tr>";
 				$dataFile = fgetcsv($monfichier, 0, ";");
+				array_push($tab,$dataFile); //on récupère les lignes avec es notes
 				foreach ($dataFile as $key =>$contenu) {
 					echo "<td>",$contenu,"</td>"; //on affiche la note
 					$moy[$key]= $moy[$key]+$contenu; //pour calculer les moyennes
@@ -87,6 +92,9 @@
 			fclose($monfichier);
 		}
 	}
+
+	//on créé la session pour la table avec les notes
+	$_SESSION["table"] = $tab;
 	
 	//On ferme le premier tableau
 	echo "      	</tbody>
