@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "prof"){
+	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "admin"){
 		header ('Location: deconnexion.php');
 	}
 ?>
@@ -19,16 +19,16 @@
 	<!--Creation du tableau -->
 	<h1 class="txtAdmin">Bonjour <?php echo ucfirst($_SESSION["nom"]);?></br></h1>
 	<p class="pAdmin">Voici un tableau résumant les résultats obtenus grâce aux votes des étudiants</p>
-  <div class="tbl-header">
-    <table id="test" cellpadding="0" cellspacing="0" border="0">
-      <thead>
-        <tr>
+  	<div class="tbl-header">
+		<table id="test" cellpadding="0" cellspacing="0" border="0">
+		<thead>
+			<tr>
 <?php
 	$first_doc = 1001;
 	$last_doc = 1020;
 	
 	//Création de la première ligne pour l'ensemble des votes
-	$matiere = array (1 => "Mathématiques","Anglais","Programmation","Algorithmique","Economie");
+	$matiere = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
 	foreach ($matiere as $lign) {
 			echo "<th><strong>",$lign,"</strong></th>";
 	}
@@ -41,20 +41,49 @@
 					<tbody>"
 						;
 						
-						
+	
+	//on récupère les connées des votes pour les afficher et calculer la moyenne
+	//liste des notes pour chaque matière
+	$nb_file=0; //nombre de fichiers lu
+	$moy=array(0,0,0,0,0); //tableau avec toutes les moyennes
+	$liste_maths=array();
+	$liste_anglais=array();
+	$liste_programmation=array();
+	$liste_algorithme=array();
+	$liste_economie=array();
+
 	for($i=$first_doc; $i<=$last_doc; $i++){
 		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
 		if (file_exists($file)) {
-			$monfichier = fopen($file, 'r+');
+			$monfichier = fopen($file, 'r');
 			// Affichage des notes
 			while ( !feof($monfichier) ){
 				echo "<tr>";
 				$dataFile = fgetcsv($monfichier, 0, ";");
-				foreach ($dataFile as $contenu) {
-					echo "<td>",$contenu,"</td>";
+				foreach ($dataFile as $key =>$contenu) {
+					echo "<td>",$contenu,"</td>"; //on affiche la note
+					$moy[$key]= $moy[$key]+$contenu; //pour calculer les moyennes
+					switch($key){ //permet d'associer les notes correspondanes à chaque matière
+						case 0:
+							array_push($liste_maths, $contenu);
+							break;
+						case 1:
+							array_push($liste_anglais, $contenu);
+							break;
+						case 2:
+							array_push($liste_programmation, $contenu);
+							break;
+						case 3:
+							array_push($liste_algorithme, $contenu);
+							break;
+						case 4:
+							array_push($liste_economie, $contenu);
+							break;
+					}
 				}
 				echo "</tr>";
+				$nb_file = $nb_file + 1; //on incrémente le nombre de fichiers lus
 			}
 			fclose($monfichier);
 		}
@@ -92,25 +121,7 @@
 					<tbody>"
 						;
 	
-	// CALCUL DE LA MOYENNE DES NOTES
-	$moy=array(0,0,0,0,0);
-	$nb_file=0;
-	for($i=$first_doc; $i<=$last_doc; $i++){
-		$file = "votes/vote-e" .$i .".txt";
-		// Si le fichier existe
-		if (file_exists($file)) {
-			$monfichier = fopen($file, 'r+');
-			// Calcul moyenne
-			while ( !feof($monfichier) ){
-				$dataFile = fgetcsv($monfichier, 0, ";");
-				foreach ($dataFile as $key=>$contenu) {
-					$moy[$key]= $moy[$key]+$contenu;
-				}
-			}
-			$nb_file = $nb_file + 1;
-			fclose($monfichier);
-		}
-	}
+	// CALCUL ET AFFICHAGE DE LA MOYENNE DES NOTES
 	for($i=0; $i<5; $i++){
 		$moy[$i]=$moy[$i]/$nb_file;
 	}
@@ -122,46 +133,6 @@
 	}
 	echo"</tr>";
 
-	// CALCUL DE L ECART TYPE DES NOTES
-	//liste des notes pour chaque matière
-	$nb_file=0;
-	$liste_maths=array();
-	$liste_anglais=array();
-	$liste_programmation=array();
-	$liste_algorithme=array();
-	$liste_economie=array();
-	for($i=$first_doc; $i<=$last_doc; $i++){
-		$file = "votes/vote-e" .$i .".txt";
-		// Si le fichier existe
-		if (file_exists($file)) {
-			$monfichier = fopen($file, 'r+');
-			// Remplir liste
-			while ( !feof($monfichier) ){
-				$dataFile = fgetcsv($monfichier, 0, ";");
-				foreach ($dataFile as $key=>$contenu) {
-					switch($key){
-						case 0:
-							array_push($liste_maths, $contenu);
-							break;
-						case 1:
-							array_push($liste_anglais, $contenu);
-							break;
-						case 2:
-							array_push($liste_programmation, $contenu);
-							break;
-						case 3:
-							array_push($liste_algorithme, $contenu);
-							break;
-						case 4:
-							array_push($liste_economie, $contenu);
-							break;
-					}
-				}
-			}
-			$nb_file = $nb_file + 1;
-			fclose($monfichier);
-		}
-	}
 	// calcul
 	$liste_matiere = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
 	echo"<tr><th>Ecart type</th>";
