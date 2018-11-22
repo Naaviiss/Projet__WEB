@@ -43,10 +43,9 @@
 						
 	
 	//on récupère les connées des votes pour les afficher et calculer la moyenne
-	//liste des notes pour chaque matière
 	$nb_file=0; //nombre de fichiers lu
 	$moy=array(0,0,0,0,0); //tableau avec toutes les moyennes
-	$liste_maths=array();
+	$liste_maths=array(); //liste des notes pour chaque matière
 	$liste_anglais=array();
 	$liste_programmation=array();
 	$liste_algorithme=array();
