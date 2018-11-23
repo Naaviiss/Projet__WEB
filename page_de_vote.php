@@ -6,13 +6,12 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] == "prof"  or $_SESSION["role"] =
 ?>
 <html>
 
-	<head>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="css/css_footer.css" media="all"/>
-	</head>
+    <head>
+        <meta charset="utf-8" />
+        <title>Page des professeurs</title>
+		<link href="css/css.css" rel="stylesheet" id="css"/>
+		<link rel="icon" href="images/logo-uvsq.png">
+    </head>
 	
 	<header>
 		<?php Include("haut_page.html"); ?>
@@ -222,9 +221,7 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] == "prof"  or $_SESSION["role"] =
 			}
 		?>
 	</center>
-	</body>
-	
-	<footer>
-		<p>2018 - <a style="color:#0a93a6; text-decoration:none;"> Projet Web</a> / Ducamp - Gonzalez - Cassand - Armengaud - Lebailly</p>
-	</footer>
+</body>
+	<footer><?php Include("footer.html"); ?></footer>
+
 </html>
