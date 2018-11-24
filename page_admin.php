@@ -24,11 +24,18 @@
 		<thead>
 			<tr>
 <?php
+	//tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
+	$tab = array();
+
+	//indices des premiers et derniers documents
+
 	$first_doc = 1001;
 	$last_doc = 1020;
 	
 	//Création de la première ligne pour l'ensemble des votes
 	$matiere = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
+	$_SESSION["matieres"] = $matiere; //pour transmettre les matieres au PDF
+
 	foreach ($matiere as $lign) {
 			echo "<th><strong>",$lign,"</strong></th>";
 	}
@@ -51,10 +58,6 @@
 	$liste_algorithme=array();
 	$liste_economie=array();
 
-	//tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
-	$tab = array();
-	array_push($tab,$matiere);
-
 	for($i=$first_doc; $i<=$last_doc; $i++){
 		$file = "votes/vote-e" .$i .".txt";
 		// Si le fichier existe
@@ -64,7 +67,6 @@
 			while ( !feof($monfichier) ){
 				echo "<tr>";
 				$dataFile = fgetcsv($monfichier, 0, ";");
-				//array_push($tab,$dataFile); //on récupère les lignes avec es notes
 				foreach ($dataFile as $key =>$contenu) {
 					echo "<td>",$contenu,"</td>"; //on affiche la note
 					$moy[$key]= $moy[$key]+$contenu; //pour calculer les moyennes
@@ -167,7 +169,7 @@
 	<!-- On ajoute le bouton pour créer le pdf -->
 	<div class="container pdf">
 		<section>
-			<a class="btn btn-primary boutonPDF" href="#" role="button">Générer un PDF</a>
+			<a class="btn btn-primary boutonPDF" href="./creer_pdf.php" role="button">Générer un PDF</a>
 		</section>
 	</div>
 

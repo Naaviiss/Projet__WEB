@@ -9,7 +9,11 @@
         session_destroy();
     }
     if(isset($_SESSION["table"])){
-        unset($_SESSION["table");
+        unset($_SESSION["table"]);
+        session_destroy();
+    }
+    if(isset($_SESSION["matieres"])){
+        unset($_SESSION["matieres"]);
         session_destroy();
     }
     header('location: index.php');
