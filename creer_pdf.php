@@ -1,7 +1,10 @@
 <?php
     session_start();
     if (isset($_SESSION["nom"]) and $_SESSION["role"] === "admin"){ //seul l'administrateur peut générer un pdf
-        require_once('tcpdf_include.php');
+        require('./fpdf.php');
+
+        //creation de l'objet PDF
+        $pdf = new FPDF('L','mm','A4'); //feuille format A4, paysage, dimensions exprimées en mm
 
       /*  //creation de l'objet PDF
         $pdf = new FPDF('L','mm','A4'); //feuille format A4, paysage, dimensions exprimées en mm
@@ -24,9 +27,8 @@
             foreach($tabNotes[0] as $note){
                 $pdf -> Cell($wcell,$hcell,utf8_decode($note),$border,0,$align);
             }
-            $pdf->Ln();
-        
-            foreach($tabNotes[1] as $note){
+            $pdf -> Ln();
+            foreach($tabNotes[0] as $note){
                 $pdf -> Cell($wcell,$hcell,utf8_decode($note),$border,0,$align);
             }
 
