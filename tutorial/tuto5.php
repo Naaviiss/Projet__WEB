@@ -90,7 +90,7 @@ $pdf = new PDF();
 // Titres des colonnes
 $header = array('Pays', 'Capitale', 'Superficie (km�)', 'Pop. (milliers)');
 // Chargement des donn�es
-$data = $_SESSION("table");
+$data = $pdf->LoadData('pays.txt');
 $pdf->SetFont('Arial','',14);
 $pdf->AddPage();
 $pdf->BasicTable($header,$data);
