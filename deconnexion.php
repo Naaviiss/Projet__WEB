@@ -8,5 +8,9 @@
         unset($_SESSION["role"]);
         session_destroy();
     }
+    if(isset($_SESSION["table"])){
+        unset($_SESSION["table");
+        session_destroy();
+    }
     header('location: index.php');
 ?>
