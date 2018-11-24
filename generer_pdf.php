@@ -32,6 +32,6 @@ if (isset($_SESSION["nom"]) and $_SESSION["role"] === "admin"){ //seul l'adminis
         //header('location: page_admin.php');
 }
 else{
-    header('location: deconnexion.php');
+    header ('Location: deconnexion.php');
 }
 ?>
