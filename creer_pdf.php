@@ -4,7 +4,7 @@
         require('./fpdf.php');
 
         //creation de l'objet PDF
-        $pdf = new FPDF('l','mm','A4'); //feuille format A4, paysage, dimensions exprimées en mm
+        $pdf = new FPDF('L','mm','A4'); //feuille format A4, paysage, dimensions exprimées en mm
 
         //on créée la page et on définit la police 
         $pdf -> AddPage();
@@ -23,9 +23,8 @@
             foreach($tabNotes[0] as $note){
                 $pdf -> Cell($wcell,$hcell,utf8_decode($note),$border,0,$align);
             }
-            $pdf->Ln();
-        
-            foreach($tabNotes[1] as $note){
+            $pdf -> Ln();
+            foreach($tabNotes[0] as $note){
                 $pdf -> Cell($wcell,$hcell,utf8_decode($note),$border,0,$align);
             }
 
