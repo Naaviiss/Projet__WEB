@@ -2,12 +2,12 @@
 /*******************************************************************************
 * FPDF                                                                         *
 *                                                                              *
-* Version: 1.81                                                                *
-* Date:    2015-12-20                                                          *
+* Version: 1.8                                                                 *
+* Date:    2015-11-29                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
 
-define('FPDF_VERSION','1.81');
+define('FPDF_VERSION','1.8');
 
 class FPDF
 {
@@ -926,18 +926,6 @@ function Image($file, $x=null, $y=null, $w=0, $h=0, $type='', $link='')
 		$this->Link($x,$y,$w,$h,$link);
 }
 
-function GetPageWidth()
-{
-	// Get current page width
-	return $this->w;
-}
-
-function GetPageHeight()
-{
-	// Get current page height
-	return $this->h;
-}
-
 function GetX()
 {
 	// Get x position
@@ -973,8 +961,8 @@ function SetY($y, $resetX=true)
 function SetXY($x, $y)
 {
 	// Set x and y positions
-	$this->SetX($x);
-	$this->SetY($y,false);
+	$this->x = $x;
+	$this->y = $y;
 }
 
 function Output($dest='', $name='', $isUTF8=false)
