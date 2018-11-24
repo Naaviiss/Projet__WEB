@@ -64,7 +64,7 @@
 			while ( !feof($monfichier) ){
 				echo "<tr>";
 				$dataFile = fgetcsv($monfichier, 0, ";");
-				array_push($tab,$dataFile); //on récupère les lignes avec es notes
+				//array_push($tab,$dataFile); //on récupère les lignes avec es notes
 				foreach ($dataFile as $key =>$contenu) {
 					echo "<td>",$contenu,"</td>"; //on affiche la note
 					$moy[$key]= $moy[$key]+$contenu; //pour calculer les moyennes
@@ -85,6 +85,7 @@
 							array_push($liste_economie, $contenu);
 							break;
 					}
+					array_push($tab,$contenu);
 				}
 				echo "</tr>";
 				$nb_file = $nb_file + 1; //on incrémente le nombre de fichiers lus
