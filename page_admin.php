@@ -107,6 +107,7 @@
 		
 		
 	// Création de l'autre tableau  
+	$moyecart = array();
 	// Pour la moyenne et l'écart type
 	echo "<section>
 			<!--Creation du tableau -->
@@ -138,14 +139,17 @@
 	// Affiche la moyenne pour chaque matière
 	echo"<tr>
 		<th>Moyenne</th>";
+		array_push($moyecart,"Moyenne");
 	for($i=0; $i<5; $i++){
 		echo"<td>".$moy[$i]."</td>";
+		array_push($moyecart,$moy[$i]);
 	}
 	echo"</tr>";
 
 	// calcul
 	$liste_matiere = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
 	echo"<tr><th>Ecart type</th>";
+	array_push($moyecart,"Ecart-type");
 	for($i=0; $i<5; $i++){
 		$arr_size=count($liste_matiere[$i]); 
 		$moy_liste=array_sum($liste_matiere[$i])/$arr_size;
@@ -155,9 +159,13 @@
 		}
 		$variance = $ans/$arr_size; 
 		$ecart_type = sqrt($variance);
+		array_push($moyecart,$ecart_type);
 		echo"<td>".round($ecart_type,3)."</td>";
 	}
 	echo"</tr>";
+
+	//on envoie le deuxieme tableau au PDF
+	$_SESSION["moyecart"] = $moyecart;
 	
 	#On ferme le deuxième tableau 
 	echo "      	</tbody>

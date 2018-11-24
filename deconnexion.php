@@ -16,5 +16,9 @@
         unset($_SESSION["matieres"]);
         session_destroy();
     }
+    if(isset($_SESSION["moyecart"])){
+        unset($_SESSION["moyecart"]);
+        session_destroy();
+    }
     header('location: index.php');
 ?>
