@@ -23,13 +23,15 @@ class PDF extends FPDF
 		$this->SetFont('');
 		// Données
 		$fill = false;
+		$i = 0;
 		foreach($data as $row)
 		{
-			$this->Cell($w[0],6,$row[0],'LR',0,'L',$fill);
-			$this->Cell($w[1],6,$row[1],'LR',0,'L',$fill);
-			$this->Cell($w[2],6,number_format($row[2],0,',',' '),'LR',0,'R',$fill);
-			$this->Cell($w[3],6,number_format($row[3],0,',',' '),'LR',0,'R',$fill);
-			$this->Ln();
+			if($i%5 == 4){
+				$this->Cell(40,10,$row,'LR',0,'L',$fill);
+			}
+			else{
+				$this->Cell(40,10,$row,'LR',1,'L',$fill);
+			}
 			$fill = !$fill;
 		}
 		// Trait de terminaison
