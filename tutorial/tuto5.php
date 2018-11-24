@@ -39,7 +39,7 @@ class PDF extends FPDF
 
 $pdf = new PDF();
 // Titres des colonnes
-$header = array('Pays', 'Capitale', 'Superficie (km�)', 'Pop. (milliers)');
+$header = array('Pays', 'Capitale', 'Superficie (km)', 'Pop. (milliers)');
 // Chargement des données
 $data = $_SESSION["table"];
 $pdf->SetFont('Arial','',14);
