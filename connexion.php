@@ -14,18 +14,15 @@
 		if (preg_match($pattern_prof, $login) or preg_match($pattern_admin, $login) or preg_match($pattern_student, $login)){
 
 			if(preg_match($pattern_prof, $login)){ //on teste si c'est un prof qui se connecte
-				echo "prof";
 				$fichier = "csv/id-profs.csv";
 				$role = "prof";
 			}
 			else if(preg_match($pattern_student, $login)){ //on teste si c'est un éleve qui se connecte
-				echo "student";
 				$fichier = "csv/id-student.csv";
 				$role = "student";
 			}
 	
 			else if(preg_match($pattern_admin, $login)){ //on teste si c'est un admin qui se connecte
-				echo "admin";
 				$fichier = "csv/id-admin.csv";
 				$role = "admin";
 			}
@@ -60,7 +57,8 @@
 						}
 					}
 					else{
-						echo ("pas de chance ");
+						$_SESSION["erreur"] = 1;
+						header('Location: index.php');
 					}
 				}
 			}
@@ -68,7 +66,8 @@
 		}
 
 		else{
-			echo "Veuillez entrer un login correct";
+			$_SESSION["erreur"] = 1;
+			header('Location: index.php');
 		}
 
 	}

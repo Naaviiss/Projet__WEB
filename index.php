@@ -15,9 +15,22 @@
 				<form method="post" action="connexion.php" class="form">
 				  <div class="form-group">
 					<label for="exampleInputEmail1">Login</label>
-					<input type="text" name="nom" class="form-control input-sm chat-input connect" placeholder="login" />
-					<label for="exampleInputPassword1">Mot de passe</label>
-					<input type="password" name="mdp" id="mdp" class="form-control input-sm chat-input connect" placeholder="mot de passe" />
+					<?php 
+						if (isset($_SESSION["erreur"])){
+						?>
+							<input type="text" name="nom" class="form-control is-invalid connect" placeholder="login" />
+							<label for="exampleInputPassword1">Mot de passe</label>
+							<input type="password" name="mdp" id="mdp" class="form-control is-invalid connect" placeholder="mot de passe" />
+					<?php
+						}
+						else{
+					?>
+						<input type="text" name="nom" class="form-control input-sm chat-input connect" placeholder="login" />
+						<label for="exampleInputPassword1">Mot de passe</label>
+						<input type="password" name="mdp" id="mdp" class="form-control input-sm chat-input connect" placeholder="mot de passe" />
+					<?php
+						}//on ferme le else
+					?>
 				  </div>
 				  <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
 				</form>

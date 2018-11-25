@@ -20,5 +20,9 @@
         unset($_SESSION["moyecart"]);
         session_destroy();
     }
+    if(isset($_SESSION["erreur"])){
+        unset($_SESSION["erreur"]);
+        session_destroy();
+    }
     header('location: index.php');
 ?>
