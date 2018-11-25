@@ -1,7 +1,7 @@
 <?php 
 	//Création de la session
 	session_start();
-	if($_SESSION["nom"]==NULL or $_SESSION["role"] === "student"  or $_SESSION["role"] === "admin"){
+	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "prof"){
 		header ('Location: deconnexion.php');
 	}
 	else{
@@ -12,7 +12,8 @@
     <head>
         <meta charset="utf-8" />
         <title>Page des professeurs</title>
-		<link href="css/css.css" rel="stylesheet" id="css"/>
+		<link href="css/csspages.css" rel="stylesheet" id="css"/>
+		<link href="css/bootstrap.min.css" rel="stylesheet" id="css"/>
 		<link rel="icon" href="images/logo-uvsq.png">
     </head>
 
@@ -122,6 +123,6 @@
 	}	
 ?>
 </body>
-	<footer><?php Include("footer.html"); ?></footer>
+<?php Include("footer.html"); ?>
 
 </html>

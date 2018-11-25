@@ -11,6 +11,7 @@
 	<body class="text-center">
 		<div class="container-fluid">
 			<div class="container">
+				<h1><strong> Connectez-vous !</strong></h1>
 				<form method="post" action="connexion.php" class="form">
 				  <div class="form-group">
 					<label for="exampleInputEmail1">Login</label>
@@ -24,6 +25,6 @@
 		</div>
 	</body>
 	
-<footer><?php Include("footer.html"); ?></footer>
+	<?php Include("footer.html"); ?>
 
 </html>

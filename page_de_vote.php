@@ -1,15 +1,15 @@
 <?php
 session_start();
-if($_SESSION["nom"]==NULL or $_SESSION["role"] == "prof"  or $_SESSION["role"] == "admin"){  //si l'utilisateur est connecter ou est bien un élève
-	header ('Location: pageconnexion.php');
+if($_SESSION["nom"]==NULL or $_SESSION["role"] != "student"){  //si l'utilisateur est connecter ou est bien un élève
+	header ('Location: deconnexion.php');
 }
 ?>
 <html>
-
     <head>
         <meta charset="utf-8" />
-        <title>Page des professeurs</title>
-		<link href="css/css.css" rel="stylesheet" id="css"/>
+        <title>Page des étudiants</title>
+		<link href="css/csspages.css" rel="stylesheet" id="css"/>
+		<link href="css/bootstrap.min.css" rel="stylesheet" id="css"/>
 		<link rel="icon" href="images/logo-uvsq.png">
     </head>
 	
@@ -224,6 +224,6 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] == "prof"  or $_SESSION["role"] =
 			</div>
 		</div>
 </body>
-	<footer><?php Include("footer.html"); ?></footer>
+<?php Include("footer.html"); ?>
 
 </html>
