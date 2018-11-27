@@ -30,11 +30,6 @@
 	<?php
 		//tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
 		$tab = array();
-
-		//indices des premiers et derniers documents
-
-		$first_doc = 1001;
-		$last_doc = 1020;
 		
 		//Création de la première ligne pour l'ensemble des votes
 		$matiere = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
@@ -61,8 +56,7 @@
 		$liste_programmation=array();
 		$liste_algorithme=array();
 		$liste_economie=array();
-
-		for($i=$first_doc; $i<=$last_doc; $i++){
+		for($i=1001; $i<1100; $i++){
 			$file = "votes/vote-e" .$i .".txt";
 			// Si le fichier existe
 			if (file_exists($file)) {
