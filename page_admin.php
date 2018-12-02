@@ -68,7 +68,7 @@
 
 		// REMPLIR LES LISTES de notes par matière
 		for($i=1001; $i<1100; $i++){
-			$file = "vote-e" .$i .".txt";
+			$file = "votes/vote-e" .$i .".txt";
 			// Si le fichier existe
 			if (file_exists($file)) {
 				$monfichier = fopen($file, 'r');
