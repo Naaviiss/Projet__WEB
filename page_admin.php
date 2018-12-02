@@ -3,7 +3,7 @@
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "admin"){
 		header ('Location: deconnexion.php');
 	}
-include ('count_etudiant.php');
+include ('count.php.php');
 ?>
 
 
