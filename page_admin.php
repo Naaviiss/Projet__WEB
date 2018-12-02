@@ -3,10 +3,10 @@
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "admin"){
 		header ('Location: deconnexion.php');
 	}
- 
+
 require ('count.php');
 ?>
-
+ 
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,10 +40,11 @@ require ('count.php');
 
 		//Création de la première ligne pour l'ensemble des votes
 		$matieres = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
-		$notes   = array ("Très satisfait","Satisfait","Moyen","Mécontent","Très mécontent");
+		$notes    = array ("Très satisfait","Satisfait","Moyen","Mécontent","Très mécontent");
 		//nombre de fichiers lu
 		$nb_file=0; 
-		//liste des notes pour chaque matière
+		/* une liste pour chaque matière 
+		 * contient les notes recu par la matière */
 		$liste_maths=array(); 
 		$liste_anglais=array();
 		$liste_programmation=array();
@@ -64,7 +65,7 @@ require ('count.php');
 		$_SESSION["notes"] = $notes;
 		$_SESSION["matieres"] = $matieres;
 
-		// REMPLIR LES LISTES de notes par matière
+		// REMPLIR LES LISTES de notes 
 		for($i=1001; $i<1001+nbEtudiant(); $i++){
 			$file = "votes/vote-e" .$i .".txt";
 			// Si le fichier existe
@@ -98,7 +99,7 @@ require ('count.php');
 			}
 		}
 		$liste_matieres = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
-		
+
 		// CALCUL DE LA MOYENNE PAR MATIERE
 		function calculMoy($liste){
 			$arr_size=count($liste); 
@@ -117,8 +118,9 @@ require ('count.php');
 			$ecart_type = sqrt($variance);
 			return $ecart_type;
 		}
-		// CALCUL NOMBRE DE (la note demandé) DANS (liste matière demandé)
-		// $valeur = note demandé
+		/* CALCUL le nombre de (la note demandé) DANS (liste matière demandé)
+		 * $liste  = liste matière demandé
+		 * $valeur = la note demandé */
 		function calculNbValeur($liste, $valeur) {
 		    $arr = array_count_values($liste);
 		    if(array_key_exists($valeur, $arr)){
@@ -138,7 +140,7 @@ require ('count.php');
 		/***********************************************/
 		// 1er tableau avec compte des notes
 		/***********************************************/
-		// en tête
+		// En tête
 		echo"<table id='test' cellpadding='0' cellspacing='0' border='1'>
 				<tr>";
 		echo "<th></th>";//1ere case vide 
@@ -148,10 +150,10 @@ require ('count.php');
 		echo "	</tr>
 		</div>
 			<div class='tbl-content'>";
-		// table
+		
+		// Intérieur de la table
 		for($j=0; $j<5; $j++){
 			$liste=$liste_matieres[$j];
-			//print_r($liste); //les listes sont correct
 			echo"<tr>";
 				echo"<th>" .$matieres[$j] ."</th>";
 				array_push($tab, $matieres[$j]);
@@ -182,6 +184,7 @@ require ('count.php');
 						<thead>
 							<tr>
 							<th></th>"; // Ligne vide pour que tout soit aligné		
+		// En tête
 		foreach ($matieres as $lign) {
 				echo "<th><strong>",$lign,"</strong></th>";
 		}
@@ -192,7 +195,7 @@ require ('count.php');
 				<div class='tbl-content'>
 						<tbody>"
 							;
-		//table
+
 		$liste_matiere = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
 		
 		// AFFICHAGE moyenne
