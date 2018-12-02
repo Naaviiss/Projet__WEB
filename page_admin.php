@@ -3,7 +3,9 @@
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "admin"){
 		header ('Location: deconnexion.php');
 	}
+include ('count_etudiant.php');
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -68,7 +70,7 @@
 		$_SESSION["matieres"] = $matiere;
 
 		// REMPLIR LES LISTES de notes par matière
-		for($i=1001; $i<1100; $i++){
+		for($i=1001; $i<1001+nbEtudiant(); $i++){
 			$file = "votes/vote-e" .$i .".txt";
 			// Si le fichier existe
 			if (file_exists($file)) {
