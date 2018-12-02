@@ -3,6 +3,7 @@
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "admin"){
 		header ('Location: deconnexion.php');
 	}
+ 
 include ('count.php');
 ?>
 
@@ -38,8 +39,8 @@ include ('count.php');
 		/************************************************/
 
 		//Création de la première ligne pour l'ensemble des votes
-		$matiere = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
-		$notes   = array ("Très satisfait","Satisfait","Moyen","Mécontent","Très mécontent");	
+		$matieres = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
+		$notes   = array ("Très satisfait","Satisfait","Moyen","Mécontent","Très mécontent");
 		//nombre de fichiers lu
 		$nb_file=0; 
 		//liste des notes pour chaque matière
@@ -48,12 +49,6 @@ include ('count.php');
 		$liste_programmation=array();
 		$liste_algorithme=array();
 		$liste_economie=array();
-		//liste count note pour chaque note(0,1,2...) par matière
-		$liste_maths2=array(1=>0,2=>0,3=>0,4=>0,5=>0); 
-		$liste_anglais2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
-		$liste_programmation2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
-		$liste_algorithme2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
-		$liste_economie2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
 		/*
 		* 0 = "sans avis";
 		* 1 = "Très mécontent";
@@ -67,7 +62,7 @@ include ('count.php');
 		$moyecart = array();
 		//pour transmettre les matieres au PDF	
 		$_SESSION["notes"] = $notes;
-		$_SESSION["matieres"] = $matiere;
+		$_SESSION["matieres"] = $matieres;
 
 		// REMPLIR LES LISTES de notes par matière
 		for($i=1001; $i<1001+nbEtudiant(); $i++){
@@ -102,18 +97,8 @@ include ('count.php');
 				fclose($monfichier);
 			}
 		}
-		// CALCUL nb de vote par matiere
-		$liste_note = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
-		$liste_nb_note = array($liste_maths2, $liste_anglais2, $liste_programmation2, $liste_algorithme2, $liste_economie2);
-		for($j=0; $j<5; $j++){
-			$listeN = $liste_note[$j]; // passe sur liste de notes de chaque matière
-			$listeNbNote = $liste_nb_note[$j]; // passe sur le compte de notes de chaque matière
-			for($k=0; $k<$nb_file; $k++){
-				$note = $listeN[$k];
-				$listeNbNote[$note] += 1;
-				$liste_nb_note[$j]=$listeNbNote;
-			}
-		}
+		$liste_matieres = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
+		
 		// CALCUL DE LA MOYENNE PAR MATIERE
 		function calculMoy($liste){
 			$arr_size=count($liste); 
@@ -132,7 +117,17 @@ include ('count.php');
 			$ecart_type = sqrt($variance);
 			return $ecart_type;
 		}
-
+		// CALCUL NOMBRE DE (la note demandé) DANS (liste matière demandé)
+		// $valeur = note demandé
+		function calculNbValeur($liste, $valeur) {
+		    $arr = array_count_values($liste);
+		    if(array_key_exists($valeur, $arr)){
+		    	return $arr[$valeur];
+		    }
+		    else{
+		    	return 0;
+		    }
+		}
 
 		/************************************************/
 		/*												*/
@@ -155,13 +150,15 @@ include ('count.php');
 			<div class='tbl-content'>";
 		// table
 		for($j=0; $j<5; $j++){
-			$liste = $liste_nb_note[$j]; // passe sur chaque liste de notes de chaque matière
+			$liste=$liste_matieres[$j];
+			//print_r($liste); //les listes sont correct
 			echo"<tr>";
-				echo"<th>".$matiere[$j]."</th>";
-				array_push($tab, $matiere[$j]);
+				echo"<th>" .$matieres[$j] ."</th>";
+				array_push($tab, $matieres[$j]);
 				for($k=5; $k>0; $k--){
-					echo"<td>".$liste[$k] ."</td>";
-					array_push($tab, $liste[$k]);
+					$val = calculNbValeur($liste_matieres[$j],$k);
+					echo"<td>" .$val ."</td>";
+					array_push($tab, $val);
 				}
 			echo"</tr>";
 		}
@@ -185,7 +182,7 @@ include ('count.php');
 						<thead>
 							<tr>
 							<th></th>"; // Ligne vide pour que tout soit aligné		
-		foreach ($matiere as $lign) {
+		foreach ($matieres as $lign) {
 				echo "<th><strong>",$lign,"</strong></th>";
 		}
 		
