@@ -65,11 +65,11 @@
 
     //1er tableau
     // Titres des colonnes
-    $header = $_SESSION["matieres"];
+    $header = $_SESSION["notes"];
     // Chargement des données
     $data = $_SESSION["table"];
     $pdf->AddPage('L','A4');
-    $wcell = 55; //largeur des cellules
+    $wcell = 45; //largeur des cellules
 
     $pdf->SetFont('Times','B',14);
     $pdf->SetTextColor(66,69,88);
@@ -77,15 +77,18 @@
     $pdf -> Ln(15);
 
     $pdf->SetFont('Times','',12);
-    $pdf->FancyTable($header,$data,$wcell,1);
+    array_unshift($header,"");
+    $pdf->FancyTable($header,$data,$wcell,2);
 
     $pdf -> Ln(10); //on sépare les tableau
 
     //2eme tableau
+    // Titres des colonnes
+    $header2 = $_SESSION["matieres"];
     $wcell = 46; //largeur des cellules
-    array_unshift($header,"");
     $moyecart = $_SESSION["moyecart"];
-    $pdf->FancyTable($header,$moyecart,$wcell,2);
+    array_unshift($header2,"");
+    $pdf->FancyTable($header2,$moyecart,$wcell,2);
 
     //2eme tableau
     $pdf->Output();

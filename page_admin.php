@@ -63,7 +63,8 @@
 		// tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
 		$tab = array();
 		$moyecart = array();
-		//pour transmettre les matieres au PDF
+		//pour transmettre les matieres au PDF	
+		$_SESSION["notes"] = $notes;
 		$_SESSION["matieres"] = $matiere;
 
 		// REMPLIR LES LISTES de notes par matière
@@ -93,7 +94,6 @@
 								array_push($liste_economie, $contenu);
 								break;
 						}
-						array_push($tab,$contenu);
 					}
 					$nb_file += 1; //on incrémente le nombre de fichiers lus
 				}
@@ -211,8 +211,9 @@
 		echo"<tr><th>Ecart type</th>";
 		array_push($moyecart,"Ecart-type");
 		for($i=0; $i<5; $i++){
-			$ecart_type = calculEcartType($liste_matiere[$i]);
-			echo"<td>".round($ecart_type,3)."</td>";
+			$ecart_type = round(calculEcartType($liste_matiere[$i]),3);
+			echo"<td>".$ecart_type."</td>";
+			array_push($moyecart,$ecart_type);
 		}
 		echo"</tr>";
 
