@@ -5,7 +5,6 @@
 			if(file_exists($file)) {
 				$tab = file($file);
 				$nb_ligne = count($tab);
-				echo "Nombre de ligne : " .$nb_ligne;
 			}
 		return $nb_ligne;
 	}
@@ -15,7 +14,6 @@
 			if(file_exists($file)) {
 				$tab = file($file);
 				$nb_ligne = count($tab);
-				echo "NOMBREEEEE ---> " .$nb_ligne;
 			}
 		return $nb_ligne;
 	}
