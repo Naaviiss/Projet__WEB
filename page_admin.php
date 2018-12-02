@@ -4,7 +4,7 @@
 		header ('Location: deconnexion.php');
 	}
  
-include ('count.php');
+require ('count.php');
 ?>
 
 
