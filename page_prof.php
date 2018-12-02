@@ -1,6 +1,7 @@
 <?php 
 	//Création de la session
 	session_start();
+include ('count_etudiant.php');	
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "prof"){
 		header ('Location: deconnexion.php');
 	}
@@ -64,7 +65,7 @@
 		
 		#On va aller voir dans chaque fichier
 		$variable="votes/vote-e";
-		for($i=1001; $i<1100; $i++){
+		for($i=1001; $i<1001+nbEtudiant(); $i++){
 			$file = $variable.$i.".txt";
 			#Vérifier si le fichier existe bien
 			#Sinon on ne fait rien
