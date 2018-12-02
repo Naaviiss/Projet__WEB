@@ -16,7 +16,7 @@
 	</head>
 	
 	<header>
-		<?php Include("haut_page.html"); ?> 
+		<?php Include("haut_page.html"); ?>
 	</header>
 
 	<body>
@@ -26,26 +26,18 @@
 		echo ucfirst($_SESSION["nom"]);?></br></h1>
 		<p class="pAdmin">Voici un tableau résumant les résultats obtenus grâce aux votes des étudiants</p>
 		<div class="tbl-header">
+
+
 	<?php
-		// tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
-		$tab = array();
-		$moyecart = array();
-		//pour transmettre les matieres au PDF
-		$_SESSION["matieres"] = $matiere;
+		/************************************************/
+		/*												*/
+		// 					CALCUL  					//
+		/*												*/
+		/************************************************/
 
 		//Création de la première ligne pour l'ensemble des votes
 		$matiere = array ("Mathématiques","Anglais","Programmation","Algorithmique","Economie");
-		$notes   = array ("Très satisfait","Satisfait","Moyen","Mécontent","Très mécontent","Sans avis");
-		/*
-		* 0 = "sans avis";
-		* 1 = "Très mécontent";
-		* 2 = "Mécontent";
-		* 3 = "Moyen";
-		* 4 = "Satisfait";
-		* 5 = "Très satisfait";
-		*/
-		
-		//On récupère les connées des votes pour les afficher et calculer la moyenne ->		
+		$notes   = array ("Très satisfait","Satisfait","Moyen","Mécontent","Très mécontent");	
 		//nombre de fichiers lu
 		$nb_file=0; 
 		//liste des notes pour chaque matière
@@ -55,12 +47,24 @@
 		$liste_algorithme=array();
 		$liste_economie=array();
 		//liste count note pour chaque note(0,1,2...) par matière
-		$liste_maths2=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0); 
-		$liste_anglais2=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0);
-		$liste_programmation2=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0);
-		$liste_algorithme2=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0);
-		$liste_economie2=array(0=>0,1=>0,2=>0,3=>0,4=>0,5=>0);
-		// SESSION POUR PDF
+		$liste_maths2=array(1=>0,2=>0,3=>0,4=>0,5=>0); 
+		$liste_anglais2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
+		$liste_programmation2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
+		$liste_algorithme2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
+		$liste_economie2=array(1=>0,2=>0,3=>0,4=>0,5=>0);
+		/*
+		* 0 = "sans avis";
+		* 1 = "Très mécontent";
+		* 2 = "Mécontent";
+		* 3 = "Moyen";
+		* 4 = "Satisfait";
+		* 5 = "Très satisfait";
+		*/
+		// tableau avec tous les resultats qu'on enverra ensuite via une session pour le pdf
+		$tab = array();
+		$moyecart = array();
+		//pour transmettre les matieres au PDF
+		$_SESSION["matieres"] = $matiere;
 
 		// REMPLIR LES LISTES de notes par matière
 		for($i=1001; $i<1100; $i++){
@@ -100,8 +104,8 @@
 		$liste_note = array($liste_maths, $liste_anglais, $liste_programmation, $liste_algorithme, $liste_economie);
 		$liste_nb_note = array($liste_maths2, $liste_anglais2, $liste_programmation2, $liste_algorithme2, $liste_economie2);
 		for($j=0; $j<5; $j++){
-			$listeN = $liste_note[$j]; // passe sur chaque liste de notes de chaque matière
-			$listeNbNote = $liste_nb_note[$j]; // passe sur chaque liste de notes de chaque matière
+			$listeN = $liste_note[$j]; // passe sur liste de notes de chaque matière
+			$listeNbNote = $liste_nb_note[$j]; // passe sur le compte de notes de chaque matière
 			for($k=0; $k<$nb_file; $k++){
 				$note = $listeN[$k];
 				$listeNbNote[$note] += 1;
@@ -117,7 +121,7 @@
 		// CALCUL ECART TYPE PAR MATIERE
 		function calculEcartType($liste){
 			$arr_size=count($liste); 
-			$moy_liste=array_sum($liste)/$arr_size;
+			$moy_liste=calculMoy($liste);
 			$ans=0; 
 			foreach($liste as $element){ 
 				$ans+=pow(($element-$moy_liste),2); 
@@ -127,8 +131,15 @@
 			return $ecart_type;
 		}
 
+
+		/************************************************/
+		/*												*/
+		// 					AFFICHAGE  					//
+		/*												*/
+		/************************************************/
+
 		/***********************************************/
-		// AFFICHAGE 1er tableau avec compte des notes
+		// 1er tableau avec compte des notes
 		/***********************************************/
 		// en tête
 		echo"<table id='test' cellpadding='0' cellspacing='0' border='1'>
@@ -146,7 +157,7 @@
 			echo"<tr>";
 				echo"<th>".$matiere[$j]."</th>";
 				array_push($tab, $matiere[$j]);
-				for($k=5; $k>=0; $k--){
+				for($k=5; $k>0; $k--){
 					echo"<td>".$liste[$k] ."</td>";
 					array_push($tab, $liste[$k]);
 				}
@@ -161,7 +172,7 @@
 		</section>";		
 
 		/***********************************************/
-		// AFFICHAGE 2eme tableau 
+		// 2eme tableau avec écart type et moyenne
 		/***********************************************/
 		// Pour la moyenne et l'écart type
 		//en tete
