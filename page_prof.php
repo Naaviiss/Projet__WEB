@@ -1,7 +1,7 @@
 <?php 
 	//Création de la session
 	session_start();
-require ('count.php');	
+	require ('count.php');	
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "prof"){
 		header ('Location: deconnexion.php');
 	}
@@ -70,7 +70,7 @@ require ('count.php');
 			#Vérifier si le fichier existe bien
 			#Sinon on ne fait rien
 			if (file_exists($file)) {
-				$monfichier = fopen($file, 'r+');
+				$monfichier = fopen($file, 'r');
 
 				while ( !feof($monfichier) ){
 					$data = fgetcsv($monfichier, 0, ";");
