@@ -26,6 +26,10 @@
 				$fichier = "csv/id-admin.csv";
 				$role = "admin";
 			}
+			else{
+				$_SESSION["erreur"] = 1;
+				header('Location: index.php');
+			}
 
 			if (file_exists($fichier)){
 				$pointeur = fopen($fichier, "r");

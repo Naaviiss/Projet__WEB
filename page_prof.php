@@ -1,7 +1,7 @@
 <?php 
 	//Création de la session
 	session_start();
-include ('count_etudiant.php');	
+require ('count.php');	
 	if($_SESSION["nom"]==NULL or $_SESSION["role"] != "prof"){
 		header ('Location: deconnexion.php');
 	}
