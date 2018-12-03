@@ -6,9 +6,9 @@
 	$mdp = $_POST['mdp'];
 
 	//on créé les pattern permettant de connaître la forme du login attendue
-	$pattern_prof = '/prof[0-9]{2}/';
-	$pattern_admin = '/admin/';
-	$pattern_student = '/e1[0-9]{3}/';
+	$pattern_prof = '/^prof[0-9]{2}$/';
+	$pattern_admin = '/^admin$/';
+	$pattern_student = '/^e1[0-9]{3}$/';
 
 	if (isset($login) and isset($mdp)){ //si les identifiants sont entrés
 		if (preg_match($pattern_prof, $login) or preg_match($pattern_admin, $login) or preg_match($pattern_student, $login)){
