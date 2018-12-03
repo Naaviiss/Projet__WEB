@@ -54,6 +54,8 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] != "student"){  //si l'utilisateu
 							#si le fichier n'es pas bien forme ou contient une valeur non valide, le reinitialise
 							fclose($monfichier);
 							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'w');
+
+chmod($monfichier,0666);
 							fputs($monfichier, "0;0;0;0;0");
 							fclose($monfichier);
 							$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
@@ -62,6 +64,8 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] != "student"){  //si l'utilisateu
 					}
 					else{
 						$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'w');
+
+chmod($monfichier,0666);
 						fputs($monfichier, "0;0;0;0;0");
 						fclose($monfichier);
 						$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'r');
@@ -152,8 +156,6 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] != "student"){  //si l'utilisateu
 						}
 						return False;
 					}
-
-
 					if(isset($_POST['ok'])){ #fait des actions lorsque le bouton est utiliser
 						if(isset($_POST['ue1'])){ #verifie si ue1 a ete renseigner
 							if(in($_POST['ue1'])){ #verifie que la valeur rentrer par le select est bien une valeur acceptable
@@ -216,6 +218,8 @@ if($_SESSION["nom"]==NULL or $_SESSION["role"] != "student"){  //si l'utilisateu
 						}
 						
 						$monfichier = fopen('votes/vote-'.$_SESSION["nom"].'.txt', 'w'); #ouverture du fichier selon l'eleve connecter
+
+chmod($monfichier,0666);
 						fputs($monfichier, $ue1.';'.$ue2.';'.$ue3.';'.$ue4.';'.$ue5); #ecrit dans le fichier les notes
 						fclose($monfichier);
 						header ('Location: page_de_vote.php'); #on recharge la page pour afficher les changements
