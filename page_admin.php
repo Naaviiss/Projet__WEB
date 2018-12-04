@@ -14,7 +14,7 @@
         <meta charset="utf-8" />
         <title>Page de l'adminitrateur</title>
 		<link href="css/csspages.css" rel="stylesheet" id="css"/>
-		<link href="css/bootstrap.min.css" rel="stylesheet" id="css"/>
+		<link href="css/bootstrap.min.css" rel="stylesheet" id="css2"/>
 		<link rel="icon" href="images/logo-uvsq.png">
 	</head>
 	
@@ -26,7 +26,7 @@
 		<section>
 			<!--Creation du tableau -->
 			<h1 class="txtAdmin">Bonjour <?php 
-			echo ucfirst($_SESSION["nom"]);?></br></h1>
+			echo ucfirst($_SESSION["nom"]);?><br></h1>
 			<p class="pAdmin">Voici un tableau résumant les résultats obtenus grâce aux votes des étudiants</p>
 			<div class="tbl-header">
 
