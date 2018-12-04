@@ -203,7 +203,7 @@ require ('count.php');
 			<th>Moyenne</th>";
 			array_push($moyecart,"Moyenne");
 		for($i=0; $i<5; $i++){
-			$moy = calculMoy($liste_matiere[$i]);
+			$moy = round(calculMoy($liste_matiere[$i]),3);
 			echo"<td>".$moy."</td>";
 			array_push($moyecart,$moy);
 		}

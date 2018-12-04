@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     session_start();
     require('./fpdf.php');
 
@@ -38,16 +38,16 @@
                     if($i%count($header) == 0){
                         $this->SetFont('','B');
                         $this->SetFillColor(37,196,129);
-                        $this->Cell($w,$hcell,$datum,1,0,$align,true);
+                        $this->Cell($w,$hcell,utf8_decode($datum),1,0,$align,true);
                     }
                     else{
                         $this -> SetFont('');
                         $this->SetFillColor(198,245,251);
-                        $this->Cell($w,$hcell,$datum,1,0,$align,$fill);
+                        $this->Cell($w,$hcell,utf8_decode($datum),1,0,$align,$fill);
                     }
                 }
                 else{
-                    $this->Cell($w,$hcell,$datum,'LR',0,$align,$fill);
+                    $this->Cell($w,$hcell,utf8_decode($datum),'LR',0,$align,$fill);
                 }
                 if ($i%count($header)==count($header)-1){
                     $this->Ln();
