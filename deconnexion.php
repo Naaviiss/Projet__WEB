@@ -1,28 +1,16 @@
 <?php
     session_start();
+    if(isset($_SESSION["id"])){
+        unset($_SESSION["id"]);
+        session_destroy();
+    }
     if(isset($_SESSION["nom"])){
         unset($_SESSION["nom"]);
         session_destroy();
     }
-    if(isset($_SESSION["role"])){
-        unset($_SESSION["role"]);
+    if(isset($_SESSION["status"])){
+        unset($_SESSION["status"]);
         session_destroy();
     }
-    if(isset($_SESSION["table"])){
-        unset($_SESSION["table"]);
-        session_destroy();
-    }
-    if(isset($_SESSION["matieres"])){
-        unset($_SESSION["matieres"]);
-        session_destroy();
-    }
-    if(isset($_SESSION["moyecart"])){
-        unset($_SESSION["moyecart"]);
-        session_destroy();
-    }
-    if(isset($_SESSION["erreur"])){
-        unset($_SESSION["erreur"]);
-        session_destroy();
-    }
-    header('location: index.php');
+    header('location: index.html');
 ?>
